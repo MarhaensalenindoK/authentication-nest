@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from 'src/users/user.entity';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 
 @Entity()
 export class Item {
@@ -19,4 +20,10 @@ export class Item {
 
   @Column()
   category: string;
+
+  @Column({ default: false })
+  approved: boolean;
+
+  @ManyToOne(() => User, (user) => user.items)
+  user: User;
 }
